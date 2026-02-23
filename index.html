@@ -1,50 +1,10 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JobBridge | Connect & Employ</title>
-    <style>
-        :root {
-            --primary: #2563eb;
-            --bg: #f8fafc;
-            --text: #1e293b;
-        }
-        body { font-family: system-ui, sans-serif; background: var(--bg); color: var(--text); margin: 0; }
-        
-        nav { 
-            background: white; 
-            padding: 1rem; 
-            display: flex; 
-            gap: 10px; 
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
-            position: sticky;
-            top: 0;
-        }
-        
-        button { 
-            padding: 8px 16px; 
-            border: none; 
-            background: #e2e8f0; 
-            border-radius: 6px; 
-            cursor: pointer; 
-            transition: 0.2s;
-        }
-        
-        button:hover { background: var(--primary); color: white; }
-
-        #app { padding: 2rem; max-width: 800px; margin: 0 auto; }
-
-        .card { 
-            background: white; 
-            padding: 1.5rem; 
-            border-radius: 8px; 
-            margin-bottom: 1rem; 
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        .connect-btn { background: var(--primary); color: white; margin-top: 10px; }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -56,68 +16,130 @@
 
 <div id="app">
     </div>
-      </div>
 
-<script>
-    // 1. Content Data Object
-    const routes = {
-        home: `
-            <h1>Welcome to JobBridge</h1>
-            <p>The platform where job seekers support each other and connect with employers.</p>
-            <div class="card">
-                <h3>Quick Tip</h3>
-                <p>Complete your profile to become visible to 500+ active recruiters.</p>
-            </div>
-        `,
-        jobs: `
-            <h1>Available Positions</h1>
-            <div class="card"><h3>Frontend Developer</h3><p>Remote • $80k - $120k</p></div>
-            <div class="card"><h3>Project Manager</h3><p>New York • $90k - $110k</p></div>
-        `,
-        network: `
-            <h1>Community Feed</h1>
-            <p>Connect with others currently in the job search process.</p>
-            <div id="user-list"></div>
-        `
-    };
-
-    // 2. Navigation Function
-    function navigate(page) {
-        const appDiv = document.getElementById('app');
-        appDiv.innerHTML = routes[page] || `<h1>404</h1><p>Page not found</p>`;
-
-        // Special logic for the networking page
-        if (page === 'network') {
-            loadUsers();
-        }
-    }
-
-    // 3. Functional Logic for Connections
-    function loadUsers() {
-        const users = [
-            { id: 1, name: "Sarah Jenkins", role: "Marketing Specialist" },
-            { id: 2, name: "David Chen", role: "Software Engineer" },
-            { id: 3, name: "Maria Garcia", role: "Data Analyst" }
-        ];
-
-        const container = document.getElementById('user-list');
-        container.innerHTML = users.map(user => `
-            <div class="card">
-                <strong>${user.name}</strong> - ${user.role}
-                <br>
-                <button class="connect-btn" onclick="connect('${user.name}')">Message ${user.name.split(' ')[0]}</button>
-            </div>
-        `).join('');
-    }
-
-    function connect(name) {
-        alert("Initializing secure chat with " + name + "...");
-    }
-
-    // Initialize the app on page 1
-    navigate('home');
-</script>
-
+<script src="script.js"></script>
 </body>
-</html>
+</html>:root {
+    --primary: #2563eb;
+    --bg: #f8fafc;
+    --text: #1e293b;
+}
 
+body { 
+    font-family: system-ui, -apple-system, sans-serif; 
+    background: var(--bg); 
+    color: var(--text); 
+    margin: 0; 
+}
+
+nav { 
+    background: white; 
+    padding: 1rem; 
+    display: flex; 
+    gap: 10px; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+button { 
+    padding: 8px 16px; 
+    border: none; 
+    background: #e2e8f0; 
+    border-radius: 6px; 
+    cursor: pointer; 
+    transition: 0.2s;
+    font-weight: 500;
+}
+
+button:hover { 
+    background: var(--primary); 
+    color: white; 
+}
+
+#app { 
+    padding: 2rem; 
+    max-width: 800px; 
+    margin: 0 auto; 
+}
+
+.card { 
+    background: white; 
+    padding: 1.5rem; 
+    border-radius: 8px; 
+    margin-bottom: 1rem; 
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.connect-btn { 
+    background: var(--primary); 
+    color: white; 
+    margin-top: 10px; 
+}
+
+.connect-btn:hover {
+    background: #1d4ed8;
+}// 1. Content Data Object
+const routes = {
+    home: `
+        <h1>Welcome to JobBridge</h1>
+        <p>The platform where job seekers support each other and connect with employers.</p>
+        <div class="card">
+            <h3>Quick Tip</h3>
+            <p>Complete your profile to become visible to 500+ active recruiters.</p>
+        </div>
+    `,
+    jobs: `
+        <h1>Available Positions</h1>
+        <div class="card"><h3>Frontend Developer</h3><p>Remote • $80k - $120k</p></div>
+        <div class="card"><h3>Project Manager</h3><p>New York • $90k - $110k</p></div>
+    `,
+    network: `
+        <h1>Community Feed</h1>
+        <p>Connect with others currently in the job search process.</p>
+        <div id="user-list"></div>
+    `
+};
+
+// 2. Navigation Function
+function navigate(page) {
+    const appDiv = document.getElementById('app');
+    
+    // Set the HTML content based on the route
+    appDiv.innerHTML = routes[page] || `<h1>404</h1><p>Page not found</p>`;
+
+    // Special logic for the networking page
+    if (page === 'network') {
+        loadUsers();
+    }
+}
+
+// 3. Functional Logic for Connections
+function loadUsers() {
+    const users = [
+        { id: 1, name: "Sarah Jenkins", role: "Marketing Specialist" },
+        { id: 2, name: "David Chen", role: "Software Engineer" },
+        { id: 3, name: "Maria Garcia", role: "Data Analyst" }
+    ];
+
+    const container = document.getElementById('user-list');
+    if (!container) return;
+
+    container.innerHTML = users.map(user => `
+        <div class="card">
+            <strong>${user.name}</strong> - ${user.role}
+            <br>
+            <button class="connect-btn" onclick="connect('${user.name}')">
+                Message ${user.name.split(' ')[0]}
+            </button>
+        </div>
+    `).join('');
+}
+
+function connect(name) {
+    alert("Initializing secure chat with " + name + "...");
+}
+
+// Initialize the app on the Home page when the script loads
+navigate('home');
