@@ -1,58 +1,151 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JobBridge | Connect & Employ</title>
+    <title>Secure Login | YourBrand</title>
     <style>
         :root {
             --primary: #2563eb;
-            --bg: #f8fafc;
-            --text: #1e293b;
+            --bg: #0f172a;
+            --card: #1e293b;
+            --text: #f8fafc;
         }
-        body { font-family: system-ui, sans-serif; background: var(--bg); color: var(--text); margin: 0; }
-        
-        nav { 
-            background: white; 
-            padding: 1rem; 
-            display: flex; 
-            gap: 10px; 
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
-            position: sticky;
-            top: 0;
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
-        
-        button { 
-            padding: 8px 16px; 
-            border: none; 
-            background: #e2e8f0; 
-            border-radius: 6px; 
-            cursor: pointer; 
+
+        .login-card {
+            background: var(--card);
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h2 { margin-bottom: 0.5rem; }
+        p { color: #94a3b8; margin-bottom: 2rem; font-size: 0.9rem; }
+
+        .auth-methods { display: flex; flex-direction: column; gap: 12px; }
+
+        .btn {
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
             transition: 0.2s;
         }
-        
-        button:hover { background: var(--primary); color: white; }
 
-        #app { padding: 2rem; max-width: 800px; margin: 0 auto; }
+        .btn-email { background: var(--primary); color: white; }
+        .btn-social { background: #334155; color: white; border: 1px solid #475569; }
+        .btn:hover { opacity: 0.9; transform: translateY(-1px); }
 
-        .card { 
-            background: white; 
-            padding: 1.5rem; 
-            border-radius: 8px; 
-            margin-bottom: 1rem; 
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        .divider {
+            margin: 1.5rem 0;
+            display: flex;
+            align-items: center;
+            color: #475569;
+            font-size: 0.8rem;
+        }
+        .divider::before, .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #334155;
+            margin: 0 10px;
         }
 
-        .connect-btn { background: var(--primary); color: white; margin-top: 10px; }
+        .input-group { text-align: left; margin-bottom: 1rem; }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border-radius: 8px;
+            border: 1px solid #334155;
+            background: #0f172a;
+            color: white;
+            box-sizing: border-box;
+        }
+
+        #email-form { display: none; }
     </style>
 </head>
 <body>
 
-<nav>
-    <button onclick="navigate('home')">Home</button>
-    <button onclick="navigate('jobs')">Find Jobs</button>
-    <button onclick="navigate('network')">Community</button>
-</nav>
+<div class="login-card">
+    <div id="main-auth">
+        <h2>Welcome Back</h2>
+        <p>Please choose a method to log in.</p>
 
-<div id="app">
+        <div class="auth-methods">
+            <button class="btn btn-social" onclick="handleAuth('Google')">Continue with Google</button>
+            <button class="btn btn-social" onclick="handleAuth('Apple')">Continue with Apple</button>
+            
+            <div class="divider">OR</div>
+            
+            <button class="btn btn-email" onclick="toggleForm()">Use Email Address</button>
+        </div>
     </div>
+
+    <div id="email-form">
+        <h2>Login</h2>
+        <p>Enter your details below.</p>
+        <div class="input-group">
+            <label>Email</label>
+            <input type="email" id="email" placeholder="name@company.com">
+        </div>
+        <div class="input-group">
+            <label>Password</label>
+            <input type="password" id="pass" placeholder="••••••••">
+        </div>
+        <button class="btn btn-email" style="width: 100%" onclick="login()">Sign In</button>
+        <p style="margin-top: 1rem; cursor: pointer" onclick="toggleForm()">← Back to options</p>
+    </div>
+</div>
+
+<script>
+    function toggleForm() {
+        const main = document.getElementById('main-auth');
+        const email = document.getElementById('email-form');
+        if (main.style.display === "none") {
+            main.style.display = "block";
+            email.style.display = "none";
+        } else {
+            main.style.display = "none";
+            email.style.display = "block";
+        }
+    }
+
+    function handleAuth(provider) {
+        alert("Redirecting to " + provider + " authentication...");
+        // In a real app, you would use: firebase.auth().signInWithPopup(provider);
+    }
+
+    function login() {
+        const email = document.getElementById('email').value;
+        if(email) {
+            alert("Logging in as " + email);
+            window.location.href = "dashboard.html"; // Navigate to your main site
+        } else {
+            alert("Please enter an email");
+        }
+    }
+</script>
+
+</body>
+</html>
