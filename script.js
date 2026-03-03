@@ -1,5 +1,5 @@
-const SB_URL = 'YOUR_SUPABASE_URL';
-const SB_KEY = 'YOUR_SUPABASE_ANON_KEY';
+const SB_URL = 'https://chemxkfqskspirippbnd.supabase.co';
+const SB_KEY = 'sb_publishable_qLFnasO54KKmAbJN_kbMRA_zgIAot8h';
 const supabase = supabase.createClient(SB_URL, SB_KEY);
 
 // --- ROUTES ---
