@@ -72,3 +72,22 @@ function loadUsers() {
 }
 
 navigate('home');
+const loginForm = document.getElementById('login-form');
+const loginPage = document.getElementById('login-page');
+const searchPage = document.getElementById('search-page');
+
+loginForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  // 1. Simulate Authentication (In a real app, check this against a database)
+  const isAuthorized = true; 
+
+  if (isAuthorized) {
+    // 2. "Navigate" by swapping display styles
+    loginPage.style.display = 'none';
+    searchPage.style.display = 'block';
+    
+    // 3. Focus the search bar automatically for better UX
+    document.getElementById('search-input').focus();
+  }
+});
