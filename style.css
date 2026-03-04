@@ -60,3 +60,10 @@ button:hover {
 .connect-btn:hover {
     background: #1d4ed8;
 }
+.search-container {
+    position: sticky;
+    top: 70px; /* Adjust based on your Nav height */
+    background: var(--bg);
+    padding: 10px 0;
+    z-index: 10;
+}
