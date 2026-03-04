@@ -51,3 +51,27 @@ const routes = {const routes = {
         </div>
     `;
 }  
+// Add this to your existing 'routes' object in script.js
+const routes = {
+    // ... your existing home, jobs, network, and login routes ...
+    onboarding: `
+        <div class="card">
+            <h2>Complete Your Profile</h2>
+            <p>Tell us a bit about yourself to get started.</p>
+            <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" id="prof-name" placeholder="John Doe" style="width:100%; margin-bottom:10px; padding:8px;">
+            </div>
+            <div class="input-group">
+                <label>Job Title</label>
+                <input type="text" id="prof-title" placeholder="Software Engineer" style="width:100%; margin-bottom:10px; padding:8px;">
+            </div>
+            <div class="input-group">
+                <label>Bio</label>
+                <textarea id="prof-bio" placeholder="Briefly describe your experience..." style="width:100%; height:80px; margin-bottom:10px; padding:8px;"></textarea>
+            </div>
+            <button class="connect-btn" onclick="saveProfile()">Save Profile & Continue</button>
+        </div>
+    `,
+    search: `... (as defined in previous step)`
+};
