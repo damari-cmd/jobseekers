@@ -146,7 +146,23 @@
         }
     }
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<script src="script.js"></script>
+
+<script>
+    function toggleForm() {
+        const main = document.getElementById('main-auth');
+        const email = document.getElementById('email-form');
+        if (main.style.display === "none") {
+            main.style.display = "block";
+            email.style.display = "none";
+        } else {
+            main.style.display = "none";
+            email.style.display = "block";
+        }
+    }
+</script>
 </body>
 </html>
 <div id="login-page">
