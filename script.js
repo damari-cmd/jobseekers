@@ -1,18 +1,18 @@
 // Initialization with your provided key
 const SB_URL = 'https://chemxkfqskspirippbnd.supabase.co';
-const SB_KEY = 'sb_publishable_cMPclTU0EXlbM-_lBnoM9Q_0JCKqV2w';
+const SB_KEY = 'sb_publishable_qLFnasO54KKmAbJN_kbMRA_zgIAot8h';
+
+// Use 'supabaseClient' instead of 'supabase' to avoid errors
 const supabaseClient = supabase.createClient(SB_URL, SB_KEY);
 
-// --- AUTH LOGIC ---
-
-// Email/Password Login
-async function login() {
+// Update your auth functions to use the new client name
+async function signUp() {
     const email = document.getElementById('email').value;
-    const password = document.getElementById('pass').value;
-
-    if (!email || !password) {
-        alert("Please enter both email and password");
-        return;
+    const password = document.getElementById('password').value;
+    const { error } = await supabaseClient.auth.signUp({ email, password }); // Use supabaseClient
+    if (error) alert(error.message);
+    else alert("Check your email for the confirmation link!");
+}
     }
 
     const { data, error } = await supabaseClient.auth.signInWithPassword({
