@@ -1,33 +1,44 @@
+// Initialization with your provided key
 const SB_URL = 'https://chemxkfqskspirippbnd.supabase.co';
-const SB_KEY = 'sb_publishable_qLFnasO54KKmAbJN_kbMRA_zgIAot8h';
-const supabase = supabase.createClient(SB_URL, SB_KEY);
+const SB_KEY = 'sb_publishable_cMPclTU0EXlbM-_lBnoM9Q_0JCKqV2w';
+const supabaseClient = supabase.createClient(SB_URL, SB_KEY);
 
-// --- ROUTES ---
-const routes = {const routes = {
-    home: `<h1>Welcome to JobBridge</h1><p>Connect with employers easily.</p>`,
-    jobs: `<h1>Available Positions</h1><div class="card"><h3>Frontend Developer</h3></div>`,
-    network: `<h1>Community Feed</h1><div id="user-list"></div>`,
-    // ADD THIS NEW SEARCH ROUTE
-    search: `
-        <div class="card">
-            <h2>Search Jobs or People</h2>
-            <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-                <input type="text" id="search-input" placeholder="Type to search..." style="flex-grow: 1; padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
-                <button class="connect-btn" onclick="executeSearch()">Search</button>
-            </div>
-            <div id="results-area">
-                <p style="color: #64748b;">Enter a keyword to see results.</p>
-            </div>
-        </div>
-    `,
-    login: `... (keep your existing login HTML here)`
-};
-  async function signIn() {
+// --- AUTH LOGIC ---
+
+// Email/Password Login
+async function login() {
     const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-    
+    const password = document.getElementById('pass').value;
+
+    if (!email || !password) {
+        alert("Please enter both email and password");
+        return;
+    }
+
+    const { data, error } = await supabaseClient.auth.signInWithPassword({
+        email: email,
+        password: password,
+    });
+
     if (error) {
+        alert("Login Error: " + error.message);
+    } else {
+        alert("Login successful!");
+        window.location.href = "index.html"; // Redirects to your main app
+    }
+}
+
+// Social Redirect (Google/Apple)
+async function handleAuth(provider) {
+    const { data, error } = await supabaseClient.auth.signInWithOAuth({
+        provider: provider.toLowerCase(),
+        options: {
+            redirectTo: window.location.origin // Redirects back to your site
+        }
+    });
+
+    if (error) alert("Authentication Error: " + error.message);
+}
         alert(error.message);
     } else {
         // Redirect to the search page after successful login
