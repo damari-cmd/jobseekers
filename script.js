@@ -85,4 +85,13 @@ const routes = {
         </div>
     `,
     search: `... (as defined in previous step)`
-};
+};function login() {
+    const email = document.getElementById('email').value;
+    if(email) {
+        alert("Logging in as " + email);
+        // This MUST match the filename you created in Step 1
+        window.location.href = "dashboard.html"; 
+    } else {
+        alert("Please enter an email");
+    }
+}
