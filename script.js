@@ -178,3 +178,16 @@ async function handleAuth(provider) {
         showError(`Could not connect to ${provider}: ${err.message}`);
     }
 }
+function toggleSidebar() {
+    const panel = document.getElementById('side-panel');
+    const toggleBtn = document.getElementById('toggle-panel');
+    
+    panel.classList.toggle('hidden');
+
+    // Update button text based on state
+    if (panel.classList.contains('hidden')) {
+        toggleBtn.innerText = "Show List";
+    } else {
+        toggleBtn.innerText = "Hide List";
+    }
+}
