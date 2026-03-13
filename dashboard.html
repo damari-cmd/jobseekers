@@ -58,6 +58,11 @@
     </header>
 
     <main id="map-container">
+        <div class="map-placeholder">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <h3>Interactive Map Loading...</h3>
+            <p>Integrating with Google Maps or Leaflet</p>
+        </div>
         <iframe 
             src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2484865.9659685846!2d-73.05531095792155!3d40.60269504960631!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1773252595003!5m2!1sen!2sus" 
             width="100%" 
@@ -80,34 +85,4 @@
     </script>
 </body>
 </html>
-<header class="search-header">
-    <div class="search-container">
-        <input type="text" id="map-search" placeholder="Search for jobs or locations...">
-        <button class="connect-btn" onclick="searchMap()">Search</button>
-        <button id="toggle-panel" onclick="toggleSidebar()" style="background: #64748b; color: white;">List View</button>
-    </div>
-</header>
-
-<main id="map-container">
-    <section class="map-view">
-        <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2484865.9659685846!2d-73.05531095792155!3d40.60269504960631!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1773252595003!5m2!1sen!2sus" 
-            width="100%" 
-            height="100%" 
-            style="border:0;" 
-            allowfullscreen="" 
-            loading="lazy">
-        </iframe>
-    </section>
-
-    <aside class="side-panel" id="side-panel">
-        <div class="panel-row">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <h3>Job Results</h3>
-                <span onclick="toggleSidebar()" style="cursor: pointer; color: #94a3b8;">✕</span>
-            </div>
-        </div>
-        <div id="search-results">
-            </div>
-    </aside>
-</main>
+</html>
