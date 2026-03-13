@@ -95,3 +95,86 @@ const routes = {
         alert("Please enter an email");
     }
 }
+// Initialization
+const SB_URL = 'https://chemxkfqskspirippbnd.supabase.co';
+const SB_KEY = 'sb_publishable_qLFnasO54KKmAbJN_kbMRA_zgIAot8h';
+const supabaseClient = supabase.createClient(SB_URL, SB_KEY);
+
+/**
+ * Helper to display errors to the user
+ * You can replace 'alert' with a custom UI toast/notification later
+ */
+function showError(message) {
+    console.error("JobBridge Error:", message);
+    alert("⚠️ " + message);
+}
+
+// Improved Sign Up
+async function signUp() {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    if (!email || !password) {
+        return showError("Please enter both an email and password.");
+    }
+
+    try {
+        const { data, error } = await supabaseClient.auth.signUp({ email, password });
+        
+        if (error) throw error; // Jump to catch block
+
+        if (data.user) {
+            alert("Success! Check your email for the confirmation link.");
+        }
+    } catch (err) {
+        showError(err.message || "An unexpected error occurred during sign up.");
+    }
+}
+
+// Improved Email Login
+async function login() {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    if (!email || !password) {
+        return showError("Email and password are required.");
+    }
+
+    try {
+        const { data, error } = await supabaseClient.auth.signInWithPassword({
+            email: email,
+            password: password,
+        });
+
+        if (error) throw error;
+
+        // Success
+        console.log("User logged in:", data.user);
+        window.location.href = "dashboard.html"; 
+    } catch (err) {
+        // Handle specific Supabase error cases
+        if (err.status === 400) {
+            showError("Invalid login credentials. Please try again.");
+        } else if (err.status === 429) {
+            showError("Too many attempts. Please wait a moment.");
+        } else {
+            showError(err.message);
+        }
+    }
+}
+
+// Improved Social Redirect
+async function handleAuth(provider) {
+    try {
+        const { error } = await supabaseClient.auth.signInWithOAuth({
+            provider: provider.toLowerCase(),
+            options: {
+                redirectTo: window.location.origin
+            }
+        });
+
+        if (error) throw error;
+    } catch (err) {
+        showError(`Could not connect to ${provider}: ${err.message}`);
+    }
+}
