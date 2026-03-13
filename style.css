@@ -67,3 +67,18 @@ button:hover {
     padding: 10px 0;
     z-index: 10;
 }
+/* Update your existing .side-panel style */
+.side-panel {
+    width: 350px;
+    background: white;
+    border-left: 1px solid #cbd5e1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    transition: margin-right 0.3s ease; /* Animation property */
+}
+
+/* Class to trigger when hidden */
+.side-panel.hidden {
+    margin-right: -350px; /* Moves the panel off-screen to the right */
+}
