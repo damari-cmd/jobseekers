@@ -3,86 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | JobBridge Map</title>
+    <title>Dashboard | JobBridge</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        .search-header {
-            background: white;
-            padding: 1rem;
-            display: flex;
-            justify-content: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .search-container {
-            width: 100%;
-            max-width: 600px;
-            display: flex;
-            gap: 10px;
-        }
-
-        #map-container {
-            width: 100%;
-            height: calc(100vh - 70px); /* Fill the rest of the screen */
-            background: #e2e8f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .map-placeholder {
-            color: #64748b;
-            text-align: center;
-        }
-
-        input[type="text"] {
-            flex: 1;
-            padding: 12px;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            font-size: 1rem;
-        }
-    </style>
 </head>
 <body>
 
     <header class="search-header">
         <div class="search-container">
-            <input type="text" id="map-search" placeholder="Search for jobs or locations...">
-            <button class="connect-btn" style="margin: 0;" onclick="searchMap()">Search</button>
+            <input type="text" id="job-search" placeholder="Search for jobs or companies...">
+            <button class="connect-btn search-btn" onclick="filterJobs()">Search</button>
         </div>
     </header>
 
-    <main id="map-container">
-        <div class="map-placeholder">
-            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-            <h3>Interactive Map Loading...</h3>
-            <p>Integrating with Google Maps or Leaflet</p>
+    <main>
+        <div id="jobs-grid" class="jobs-grid">
+            <!-- Job cards are rendered dynamically by script.js -->
         </div>
-        <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2484865.9659685846!2d-73.05531095792155!3d40.60269504960631!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1773252595003!5m2!1sen!2sus" 
-            width="100%" 
-            height="100%" 
-            style="border:0;" 
-            allowfullscreen="" 
-            loading="lazy" 
-            referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
     </main>
 
-    <script>
-        function searchMap() {
-            const query = document.getElementById('map-search').value;
-            if(query) {
-                alert("Searching map for: " + query);
-                // Logic to update map markers would go here
-            }
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
-</html>
 </html>

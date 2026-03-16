@@ -191,3 +191,106 @@ function toggleSidebar() {
         toggleBtn.innerText = "Hide List";
     }
 }
+
+// Mock job data for demonstration
+const jobListings = [
+    {
+        title: "Software Engineer",
+        company: "TechCorp",
+        location: "San Francisco, CA",
+        salary: "$120k – $160k",
+        description: "Build scalable web applications using modern JavaScript frameworks. Collaborate with cross-functional teams to deliver high-quality software."
+    },
+    {
+        title: "Product Manager",
+        company: "InnovateCo",
+        location: "New York, NY",
+        salary: "$110k – $150k",
+        description: "Define product vision and roadmap, work closely with engineering and design teams to deliver exceptional user experiences."
+    },
+    {
+        title: "UX Designer",
+        company: "DesignHub",
+        location: "Austin, TX",
+        salary: "$90k – $120k",
+        description: "Create intuitive and beautiful user interfaces. Conduct user research and translate insights into compelling design solutions."
+    },
+    {
+        title: "Data Analyst",
+        company: "DataDriven Inc.",
+        location: "Remote",
+        salary: "$85k – $110k",
+        description: "Analyze large datasets to uncover business insights. Build dashboards and reports to support data-driven decision making."
+    },
+    {
+        title: "DevOps Engineer",
+        company: "CloudOps",
+        location: "Seattle, WA",
+        salary: "$115k – $155k",
+        description: "Manage CI/CD pipelines, cloud infrastructure, and automation to keep our systems reliable, scalable, and secure."
+    },
+    {
+        title: "Marketing Specialist",
+        company: "GrowthLab",
+        location: "Chicago, IL",
+        salary: "$65k – $85k",
+        description: "Plan and execute digital marketing campaigns across multiple channels. Analyze performance metrics and optimize for growth."
+    }
+];
+
+function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+}
+
+function renderJobListings(jobs) {
+    const grid = document.getElementById('jobs-grid');
+    if (!grid) return;
+
+    if (jobs.length === 0) {
+        grid.innerHTML = '<p class="no-results">No jobs found matching your search.</p>';
+        return;
+    }
+
+    grid.innerHTML = jobs.map((job, index) => `
+        <div class="job-card">
+            <h3>${escapeHtml(job.title)}</h3>
+            <span class="company">${escapeHtml(job.company)}</span>
+            <div class="meta">
+                <span>📍 ${escapeHtml(job.location)}</span>
+                <span>💰 ${escapeHtml(job.salary)}</span>
+            </div>
+            <p class="description">${escapeHtml(job.description)}</p>
+            <button class="apply-btn" data-index="${index}">Apply Now</button>
+        </div>
+    `).join('');
+
+    grid.querySelectorAll('.apply-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const job = jobs[parseInt(this.dataset.index, 10)];
+            alert('Applying for ' + job.title + ' at ' + job.company);
+        });
+    });
+}
+
+function filterJobs() {
+    const query = document.getElementById('job-search').value.toLowerCase().trim();
+    const filtered = jobListings.filter(job =>
+        job.title.toLowerCase().includes(query) ||
+        job.company.toLowerCase().includes(query) ||
+        job.location.toLowerCase().includes(query)
+    );
+    renderJobListings(filtered);
+}
+
+// Render all job listings on page load if the grid exists
+if (document.getElementById('jobs-grid')) {
+    renderJobListings(jobListings);
+
+    // Filter jobs in real-time as user types
+    const searchInput = document.getElementById('job-search');
+    if (searchInput) {
+        searchInput.addEventListener('input', filterJobs);
+    }
+}
