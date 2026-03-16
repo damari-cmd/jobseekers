@@ -1,6 +1,6 @@
 // Initialization
 const SB_URL = https://tqegziwxeqpfypnyphar.supabase.co
-const SB_KEY = sb_publishable_cMPclTU0EXlbM-_lBnoM9Q_0JCKqV2w
+const SB_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRxZWd6aXd4ZXFwZnlwbnlwaGFyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4MTc5ODAsImV4cCI6MjA4ODM5Mzk4MH0.zTiY9nwnVBqs9Btc_aJjDZian7WK02VhxnojJQq36uI
 const supabaseClient = supabase.createClient(SB_URL, SB_KEY);
 
 /**
